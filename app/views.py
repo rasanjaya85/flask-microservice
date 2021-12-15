@@ -63,12 +63,12 @@ html = "<h1>This is HTML </h1>"
 #suspicious
 suspicious = "<script>alert('Never trust the user input.!')</script>"
 
-@app.route("/jinja")
-def jinja():
-    my_name = "Neon"
-    return render_template("public/jinja.html", name=name, age=age, langs=langs, 
-    friends=friends, colors=colors, cool=cool, remote=remote, repeat=repeat, GitRemote=GitRemote, date=date,
-    html=html, suspicious=suspicious )
+# @app.route("/jinja")
+# def jinja():
+#     my_name = "Neon"
+#     return render_template("public/jinja.html", name=name, age=age, langs=langs, 
+#     friends=friends, colors=colors, cool=cool, remote=remote, repeat=repeat, GitRemote=GitRemote, date=date,
+#     html=html, suspicious=suspicious )
 
 @app.template_filter("clean_date")
 def clean_date(date):
@@ -94,4 +94,34 @@ def sign_up():
 
         return redirect(request.url)
     return render_template("public/sign_up.html")
+
+profile_users = {
+    "mitsuhiko": {
+        "name": "Anan Ronacher",
+        "bio": "Creator of the Flask Framework",
+        "twitter_handle": "@mitsuhiko",
+    },
+    "gvanrossum": {
+        "name": "Guido Van Rossum",
+        "bio": "Creator of the Python programming language",
+        "twitter_handle": "@gvanrossum"
+    },
+    "elonmusk": {
+        "name": "Elon Musk",
+        "bio": "technology entrepreneur, investor, and engineer",
+        "twitter_handle": "@elonmusk"
+    }
+}
+
+
+
+@app.route("/profile/<username>")
+def profile(username):
+    profile_user = None
+    if username in profile_users:
+        profile_user = profile_users[username]
+        print(f"{username} is already existing.")
+    else:
+        print(f"User is invalid")
+    return render_template("public/profile.html", username=username, profile_user=profile_user)
 

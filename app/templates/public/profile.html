@@ -1,0 +1,23 @@
+{% extends "public/templates/public_template.html" %}
+{% block titile %} profile {% endblock %}
+
+{% block main %}
+	<div class="container">
+		<div class="row">
+			<div class="col">
+				<h1>Profile</h1>
+				{% if username %}
+				<h5 class="card-title">{{ username }}</h5>
+				<hr>
+				<p><strong>{{ profile_user["name"]}}</strong></p>
+				<p style="color: blue" >{{ profile_user["twitter_handle"]}}</p>
+				<p class="text-munted"> {{ profile_user["bio"]}}</p>
+				{% else %}
+					User {{ username }}	 not found!.
+				{% endif %}
+				<hr>
+			</div>
+		</div>
+	</div>
+
+{% endblock %}
