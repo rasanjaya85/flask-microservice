@@ -23,11 +23,13 @@
 					<label>Password</label>
 					<input type="password" class="form-control" id="password" name="password"
 						placeholder="Enter you password">
-				</div> 
-				<button class="btn btn-primary" type="submit" >Sign Up</button>
+				</div>
+				<button class="btn btn-primary" type="submit">Sign Up</button>
 
 				{% if feedback %}
-					<p class="text-danger float-right">{{ feedback }}</p>
+				<div class="alert alert-danger" role="alert">
+					{{ feedback }}
+				</div>
 				{% endif %}
 			</form>
 		</div>
