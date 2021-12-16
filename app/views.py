@@ -114,7 +114,6 @@ profile_users = {
 }
 
 
-
 @app.route("/profile/<username>")
 def profile(username):
     profile_user = None
@@ -125,3 +124,20 @@ def profile(username):
         print(f"User is invalid")
     return render_template("public/profile.html", username=username, profile_user=profile_user)
 
+from flask import jsonify, make_response
+
+@app.route("/json", methods=["POST"])
+def json_data():
+    #validate the json data
+    if request.is_json:
+        req = request.get_json()
+        response_body  = {
+            "message": "Json Data Recieved.",
+            "name": req.get("name")
+        }
+        print(jsonify(response_body))
+        res = make_response(jsonify(response_body), 200) 
+        return  res
+    else:
+        # return with client error(bad request)
+        return "Json Data not recieved.", 400
