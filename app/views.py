@@ -155,3 +155,17 @@ def create_entry():
     res = make_response(jsonify(req), 200)
 
     return  res
+
+
+@app.route("/query")
+def query():
+
+    # req = request.values
+    # print(",".join(f" {k} : {v} " for k, v in req.items()))
+    # return "thanks", 200    
+    if request.args:
+        req = request.args
+        serialized = ", ".join(f"{k} : {v}" for k, v in req.items())
+        return f"{serialized}", 200
+    else:
+        return "No query string recieved.", 200
