@@ -141,3 +141,17 @@ def json_data():
     else:
         # return with client error(bad request)
         return "Json Data not recieved.", 400
+
+
+@app.route("/guestbook")
+def guestbook():
+    return render_template("public/guestbook.html")
+
+
+@app.route("/guestbook/create-entry", methods=["POST"])
+def create_entry():
+    req = request.get_json()
+    print(req)
+    res = make_response(jsonify(req), 200)
+
+    return  res
